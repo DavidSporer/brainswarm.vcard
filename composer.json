@@ -1,0 +1,32 @@
+{
+  "name": "brainswarm/vcard",
+  "authors": [
+    {
+      "name": "David Sporer",
+      "email": "david.sporer@passcreator.de"
+    }
+  ],
+  "type": "typo3-cms-extension",
+  "repositories": [
+    {
+      "type": "vcs",
+      "url": "https://github.com/ssx/php-carddav"
+    },
+    {
+      "type": "vcs",
+      "url": "https://github.com/mittwald/typo3-forum"
+    }
+  ],
+  "name": "brainswarm/typo3-thw-collaboration",
+  "require": {
+    "typo3/cms": "7.6.*",
+    "typo3-ter/femanager": "2.0.*",
+    "sabre/dav": "~3.1.0",
+    "ssx/carddav": "dev-master"
+  },
+  "autoload": {
+    "psr-4": {
+      "Brainswarm\\Vcard\\": "typo3conf/ext/brainswarm-vcard/Classes"
+    }
+  }
+}
