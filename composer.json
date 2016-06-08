@@ -11,10 +11,6 @@
     {
       "type": "vcs",
       "url": "https://github.com/ssx/php-carddav"
-    },
-    {
-      "type": "vcs",
-      "url": "https://github.com/mittwald/typo3-forum"
     }
   ],
   "name": "brainswarm/typo3-thw-collaboration",
