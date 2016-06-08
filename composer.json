@@ -13,7 +13,6 @@
       "url": "https://github.com/ssx/php-carddav"
     }
   ],
-  "name": "brainswarm/typo3-thw-collaboration",
   "require": {
     "typo3/cms": "7.6.*",
     "typo3-ter/femanager": "2.0.*",
