@@ -7,6 +7,8 @@ This extension extends femanager in order to synchronize changes to fe_user User
 Install the extension.
 Afterwards you need to tell it the credentials of your CardDAV user that you want to use to sync data.
 
+Add this to your TypoScript setup.
+
 ```
 plugin.tx_brainswarm_vcard {
   settings {
