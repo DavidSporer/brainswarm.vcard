@@ -8,25 +8,27 @@
 namespace Brainswarm\Vcard\Controller;
 
 use Brainswarm\Vcard\Utility\Vcard;
+use In2code\Femanager\Domain\Model\User;
+use TYPO3\CMS\Core\Utility\GeneralUtility;
+use TYPO3\CMS\Extbase\Domain\Model\FrontendUser;
+use TYPO3\CMS\Extbase\Domain\Repository\FrontendUserRepository;
+use TYPO3\CMS\Extbase\Object\ObjectManager;
 
 class NewController extends \In2code\Femanager\Controller\NewController {
 
     /**
      * action create
      *
-     * @param \Brainswarm\Vcard\Domain\Model\User $user
+     * @param User $user
      * @validate $user In2code\Femanager\Domain\Validator\ServersideValidator
      * @validate $user In2code\Femanager\Domain\Validator\PasswordValidator
      * @return void
      */
-    public function createAction(\Brainswarm\Vcard\Domain\Model\User $user) {
-        /*$settingsArray = $GLOBALS['TSFE']->tmpl->setup;
-        $settingsArray = $settingsArray['plugin.']['tx_brainswarm_vcard.']['settings.']['cardDav.'];
-*/
+    public function createAction(User $user) {
         $vcardUtility = new Vcard();
         $vcard_id = $vcardUtility->createContact($user);
 
-        $user->setVcardId($vcard_id);
+        $user->setName($vcard_id);
 
         parent::createAction($user);
     }

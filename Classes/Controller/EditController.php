@@ -8,6 +8,11 @@
 namespace Brainswarm\Vcard\Controller;
 
 use Brainswarm\Vcard\Utility\Vcard;
+use In2code\Femanager\Utility\LocalizationUtility;
+use TYPO3\CMS\Core\Utility\GeneralUtility;
+use TYPO3\CMS\Extbase\Domain\Model\FrontendUser;
+use TYPO3\CMS\Extbase\Domain\Repository\FrontendUserRepository;
+use TYPO3\CMS\Extbase\Object\ObjectManager;
 
 class EditController extends \In2code\Femanager\Controller\EditController {
 
@@ -20,7 +25,7 @@ class EditController extends \In2code\Femanager\Controller\EditController {
      * @validate $user In2code\Femanager\Domain\Validator\CaptchaValidator
      * @return void
      */
-    public function updateAction(\Brainswarm\Vcard\Domain\Model\User $user) {
+    public function updateAction(FrontendUser $user) {
         $vcardUtility = new Vcard();
         $vcardUtility->updateContact($user);
 
@@ -30,6 +35,12 @@ class EditController extends \In2code\Femanager\Controller\EditController {
             $user->setImage($images[0]);
         }
 
-        parent::updateAction($user);
+//        parent::updateAction($user);
+
+        $userRepository = GeneralUtility::makeInstance(ObjectManager::class)->get(FrontendUserRepository::class);
+        $userRepository->update($user);
+
+        $this->addFlashMessage(LocalizationUtility::translate('update'));
+        $this->redirect('edit');
     }
 }

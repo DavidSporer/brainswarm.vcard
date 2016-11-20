@@ -10,6 +10,7 @@ namespace Brainswarm\Vcard\Utility;
 use Sabre\DAV\Client;
 use Sabre\VObject;
 use TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface;
+use TYPO3\CMS\Extbase\Domain\Model\FrontendUser;
 use TYPO3\CMS\Extbase\Service\TypoScriptService;
 
 class Vcard
@@ -33,7 +34,7 @@ class Vcard
     /**
      * Creates a VCard using the given user
      *
-     * @param \Brainswarm\VCard\Domain\Model\User $user
+     * @param FrontendUser $user
      * @return string
      */
     public function createContact($user)
@@ -49,20 +50,20 @@ class Vcard
     }
 
     /**
-     * @param \Brainswarm\VCard\Domain\Model\User $user
+     * @param FrontendUser $user
      */
     public function updateContact($user)
     {
 
         $vcard = $this->createVcard($user);
         $client = new Client($this->createSettingsArray());
-        $response = $client->request('PUT', $user->getVcardId() . '.vcf', $vcard->serialize());
+        $response = $client->request('PUT', $user->getName() . '.vcf', $vcard->serialize());
 
         //die(print_r($response));
     }
 
     /**
-     * @param \Brainswarm\VCard\Domain\Model\User $user
+     * @param FrontendUser $user
      * @param string $vcardId
      * @return VObject\Component\VCard
      */
@@ -72,7 +73,7 @@ class Vcard
             'FN' => $user->getFirstName() . ' ' . $user->getLastName(),
             'TEL' => $user->getTelephone(),
             'EMAIL' => $user->getEmail(),
-            'UID' => ($vcardId === "" ? $user->getVcardId() : $vcardId)
+            'UID' => ($vcardId === "" ? $user->getName() : $vcardId)
         ]);
 
         if ($user->getImage() !== null && $user->getImage() !== "") {
